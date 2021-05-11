@@ -434,6 +434,10 @@ func (s *Server) finalizeLogin(identity connector.Identity, authReq storage.Auth
 		authReq.ConnectorID, claims.Username, claims.PreferredUsername, email, claims.Groups)
 
 	returnURL := path.Join(s.issuerURL.Path, "/approval") + "?req=" + authReq.ID
+	
+	s.logger.Infof("Return URL Found:  %q",returnURL)
+
+
 	_, ok := conn.(connector.RefreshConnector)
 	if !ok {
 		return returnURL, nil
